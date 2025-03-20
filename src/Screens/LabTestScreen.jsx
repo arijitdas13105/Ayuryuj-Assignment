@@ -1,7 +1,11 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const LabTestScreen = () => {
+    console.log("HomeScreenGridData");
+  useEffect(() => {
+    console.log("HomeScreenGridData");
+  },[])
   return (
     <View>
       <Text>LabTestScreen</Text>

@@ -5,20 +5,27 @@ import {
   SafeAreaView,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreenGridData, TestPackages} from './Data';
-
+import { useNavigation } from '@react-navigation/native';
 const HomeScreen = () => {
+  const navigation=useNavigation();
+  
   return (
     <ScrollView>
       <View style={styles.container}>
         {/* top section */}
         <View style={styles.menuTopHolder}>
           <View style={[styles.rowDesign, styles.menu_location]}>
-            <Entypo name="menu" size={30} color="black" />
+            {/* <Entypo name="menu" size={30} color="black" /> */}
+            <TouchableOpacity onPress={() => navigation.openDrawer()}>
+              <Entypo name="menu" size={30} color="black" />
+            </TouchableOpacity>
+
             <View>
               <Text>Your Location</Text>
               <Text>Delhi</Text>
@@ -102,6 +109,12 @@ const HomeScreen = () => {
         </View>
 
         {/* ANOTHER SECTIONS */}
+
+        <View style={styles.downBannerContainer} >
+          <Image style={styles.downBannerImage} 
+             // source={{uri:'https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2024/04/health-tools-desktop.webp'}}  />
+            source={{uri:'https://cdn.dribbble.com/users/4613797/screenshots/16277983/86_4x.jpg'}}  />
+        </View>
       </View>
     </ScrollView>
   );
@@ -110,6 +123,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 2,
+    marginTop:25
   },
   rowDesign: {
     flexDirection: 'row',
@@ -231,6 +245,20 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 2,
   },
+  downBannerContainer:{
+    padding: 10,
+    // borderWidth:2,
+    height:300
+
+  },
+  downBannerImage:{
+    objectFit:'cover',
+    
+    width:'100%',
+    // height:'100%',
+     height:'100%',
+    //  aspectRatio:16/15
+  }
 });
 
 export default HomeScreen;
