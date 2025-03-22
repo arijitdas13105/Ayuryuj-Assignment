@@ -1,97 +1,109 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Health Consultation App
+---
+## **📹📺 Demo Video**  
 
-# Getting Started
+[![Watch the video](https://img.youtube.com/vi/avvAfCXUes4/0.jpg)](https://youtu.be/avvAfCXUes4)  
+🔗 Watch the demo: [https://youtu.be/avvAfCXUes4](https://youtu.be/avvAfCXUes4)  
+---
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+ 
+## 🛠️ Dependencies
+Below are the dependencies used in this project:
 
-## Step 1: Start Metro
-
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
-
-To start the Metro dev server, run the following command from the root of your React Native project:
-
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+```json
+"dependencies": {
+    "@react-native-firebase/app": "^21.12.0",
+    "@react-native-firebase/auth": "^21.12.0",
+    "@react-navigation/bottom-tabs": "^7.2.1",
+    "@react-navigation/drawer": "^7.2.0",
+    "@react-navigation/native": "^7.0.15",
+    "firebase": "^11.5.0",
+    "react": "19.0.0",
+    "react-devtools-core": "^6.1.1",
+    "react-native": "0.78.0",
+    "react-native-gesture-handler": "^2.24.0",
+    "react-native-linear-gradient": "^2.8.3",
+    "react-native-reanimated": "^3.17.1",
+    "react-native-safe-area-context": "^5.3.0",
+    "react-native-screens": "^4.9.2",
+    "react-native-vector-icons": "^10.2.0"
+}
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 🚀 Getting Started
 
-### Android
-
+### 1️⃣ **Clone the Repository**
 ```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+git clone https://github.com/arijitdas13105/Ayuryuj-Assignment.git
+cd Ayuryuj-Assignment
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
+### 2️⃣ **Install Dependencies**
+Run the following command to install the required dependencies:
+ 
+ npm:
 ```sh
-bundle install
+npm install
 ```
 
-Then, and every time you update your native dependencies, run:
+### 3️⃣ **Set Up Firebase**
+1. Go to [Firebase Console](https://console.firebase.google.com/).
+2. Create a project and add a new app (Android/iOS).
+3. Download the `google-services.json` file (for Android) 
+4. Place the file inside the appropriate directory:
+   - **Android:** `android/app/`
+ 
 
+### 4️⃣ **Run the Project**
+
+#### **For Android**
 ```sh
-bundle exec pod install
+npx react-native run-android
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+ 
 
-```sh
-# Using npm
-npm run ios
 
-# OR using Yarn
-yarn ios
-```
+## **Work Completed on the React Native App Assignment**  
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+I have successfully implemented the following features as per the assignment requirements:  
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+### ✅ **Firebase Authentication**  
+- Implemented phone number OTP verification using **Firebase Authentication**.  
+- Users can log in using their mobile number and receive an OTP for verification.  
 
-## Step 3: Modify your app
+### ✅ **Screens Developed**  
+1. **Login Screen**  
+   - Integrated with Firebase for OTP-based authentication.  
+   - User-friendly UI with smooth OTP input and verification.  
 
-Now that you have successfully run the app, let's make changes!
+2. **Home Screen**  
+   - Displays a welcoming message along with the app logo.  
+   - Includes sections such as **"Consult a Doctor"**, **"Book Tests"**, and more.  
+   - Implemented **Bottom Navigation** for seamless navigation.  
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+3. **Doctor Listing Screen**  
+   - Displays a **list of doctors** (currently using mock/static data).  
+   - Each doctor card includes a **name, specialty, and an image**.  
+ 
+4. **Side Navigation Drawer**  
+   - Implemented a **Drawer Navigation** for accessing different sections:  
+     - **Home**  
+     - **Doctor Listing**  
+     - **Profile/Settings**  
+     - **Logout/Help**  
+   - Can be accessed via swiping or tapping a button.  
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### ✅ **Navigation Implementation**  
+- **Bottom Navigation Bar** with tabs for Home, Doctor Listing, and Profile.  
+- **Side Navigation Drawer** for quick access to different sections.  
+- **Smooth navigation transitions** using React Navigation.  
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### ✅ **UI Design & Responsiveness**  
+   
+- Ensured a **responsive layout**  .  
+- Maintained a **consistent design** with proper colors, fonts, and spacing.  
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+ 
