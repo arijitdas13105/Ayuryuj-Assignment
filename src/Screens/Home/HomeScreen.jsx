@@ -11,10 +11,18 @@ import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreenGridData, TestPackages} from './Data';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 const HomeScreen = () => {
-  const navigation=useNavigation();
-  
+  const navigation = useNavigation();
+  const colors = [
+    '#d1dced',
+    '#e9f0b9',
+    '#BBDEFB',
+    '#edce98',
+    '#dcc8e8',
+    '#B2DFDB',
+  ];
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -40,13 +48,38 @@ const HomeScreen = () => {
         <View style={styles.gridContainer}>
           {HomeScreenGridData.map((item, index) => {
             return (
-              <View key={index} style={styles.gridItems}>
+              <View
+                key={index}
+                style={[
+                  styles.gridItems,
+                  {backgroundColor: colors[index % colors.length]},
+                ]}>
                 <Text style={styles.gridText}> {item.title} </Text>
                 <Image
-                  style={{width: 80, height: 90, borderRadius: 10}}
+                  style={styles.gridImage}
                   source={{uri: item.imageLink}}
                 />
-                <Text style={styles.gridExtraText}> {item.extra} </Text>
+
+                {
+                  item.extra && (
+                    <View style={styles.gridExtraTextContainer}>
+                  <LinearGradient
+                    colors={['#F38FD4', '#F8A98A']} // Gradient from light to dark red
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 1}}
+                    style={styles.gridExtraText}>
+                  
+                      <Text style={styles.gridExtraTextStyle}>{item.extra}</Text>
+                 
+                    
+                  </LinearGradient>
+                </View>
+                  )
+                }
+                
+                {/* {item.extra && (
+                  <Text style={styles.gridExtraText}> {item.extra} </Text>
+                )} */}
               </View>
             );
           })}
@@ -89,15 +122,28 @@ const HomeScreen = () => {
           {TestPackages.map((item, index) => {
             return (
               <View key={index} style={styles.gridPackageItems}>
-                <Text style={{fontSize:15,fontWeight:'bold',color:'red'}}> {item.testCount}+ Tests </Text>
+                <Text style={{fontSize: 15, fontWeight: 'bold', color: '#17207D'}}>
+                  {' '}
+                  {item.testCount}+ Tests{' '}
+                </Text>
                 <Text style={[styles.blackText, {fontSize: 17}]}>
                   {' '}
                   {item.title}{' '}
                 </Text>
-                <Text  style={[styles.blackText, {fontSize: 17}]}> {item.type} </Text>
+                <Text style={[styles.blackText, {fontSize: 17}]}>
+                  {' '}
+                  {item.type}{' '}
+                </Text>
                 <View style={styles.healthCheckFees}>
                   <Text style={styles.feesTextColor}> {item.price} </Text>
-                  <Text style={[styles.feesTextColor,{textDecorationLine:'line-through'}]}> {item.actualPrice} </Text>
+                  <Text
+                    style={[
+                      styles.feesTextColor,
+                      {textDecorationLine: 'line-through'},
+                    ]}>
+                    {' '}
+                    {item.actualPrice}{' '}
+                  </Text>
                   <Text style={styles.feesTextColor}>
                     {' '}
                     {item.discount}% OFF{' '}
@@ -110,10 +156,14 @@ const HomeScreen = () => {
 
         {/* ANOTHER SECTIONS */}
 
-        <View style={styles.downBannerContainer} >
-          <Image style={styles.downBannerImage} 
-             // source={{uri:'https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2024/04/health-tools-desktop.webp'}}  />
-            source={{uri:'https://cdn.dribbble.com/users/4613797/screenshots/16277983/86_4x.jpg'}}  />
+        <View style={styles.downBannerContainer}>
+          <Image
+            style={styles.downBannerImage}
+            // source={{uri:'https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2024/04/health-tools-desktop.webp'}}  />
+            source={{
+              uri: 'https://cdn.dribbble.com/users/4613797/screenshots/16277983/86_4x.jpg',
+            }}
+          />
         </View>
       </View>
     </ScrollView>
@@ -123,7 +173,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 2,
-    marginTop:25
+    marginTop: 25,
   },
   rowDesign: {
     flexDirection: 'row',
@@ -135,6 +185,25 @@ const styles = StyleSheet.create({
   menu_location: {
     gap: 10,
   },
+  gridPackageContainer: {
+    padding: 10,
+    // grid
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  gridPackageItems: {
+    width: '45%',
+    // height: 150,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    paddingVertical: 25,
+    paddingHorizontal: 5,
+    alignItems: 'flex-start',
+    gap:3
+  },
   gridContainer: {
     padding: 10,
     // grid
@@ -144,6 +213,7 @@ const styles = StyleSheet.create({
 
     justifyContent: 'center',
   },
+
   gridItems: {
     width: '30%',
     height: 150,
@@ -152,40 +222,39 @@ const styles = StyleSheet.create({
     // justifyContent:'center',
     alignItems: 'center',
     position: 'relative',
+    justifyContent: 'space-between', // Distribute space between image and text
+    paddingVertical: 10,
   },
-  gridPackageContainer: {
-    padding: 10,
-    // grid
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 15,
-     justifyContent:'center',
-    alignItems:'center'
-  },
-  gridPackageItems: {
-    width: '45%',
-    // height: 150,
-    backgroundColor: 'white',
+
+  gridImage: {
+    width: 80,
+    height: 90,
     borderRadius: 10,
-     paddingVertical: 25,
-     paddingHorizontal:5,
-    alignItems: 'flex-start',
-   },
+    alignSelf: 'center',
+  },
   gridText: {
     color: 'black',
     textAlign: 'center',
     color: 'black',
+    fontSize: 15,
   },
+  gridExtraTextContainer: {
+  position: 'absolute',
+  bottom: 20,
+  borderRadius: 5,
+  overflow: 'hidden',
+},
   gridExtraText: {
     paddingHorizontal: 8,
-    borderWidth: 1,
-    borderRadius: 10,
-    position: 'absolute',
-    bottom: 40,
-    backgroundColor: 'red',
+    paddingVertical:2,
+     alignItems: 'center',
+  justifyContent: 'center',
+  },
+  gridExtraTextStyle:{
     color: 'white',
     fontWeight: 'bold',
-  },
+    textAlign:'center',
+   },
   skinContestContainer: {
     marginTop: 20,
     paddingHorizontal: 20,
@@ -209,7 +278,7 @@ const styles = StyleSheet.create({
     textAlign: 'center', // ✅ Centers text inside the View
   },
   blueText: {
-    color: 'blue',
+    color: '#05778B',
     fontWeight: 'bold',
     fontSize: 25,
   },
@@ -228,37 +297,37 @@ const styles = StyleSheet.create({
   faqViewALL: {
     paddingHorizontal: 8,
     paddingVertical: 5,
-    borderWidth: 1,
-    borderRadius: 10,
+     borderRadius: 10,
     fontWeight: 'bold',
-    backgroundColor: 'blue',
+    backgroundColor: '#05778B',
     color: 'white',
     textAlign: 'center',
   },
   feesTextColor: {
     color: 'white',
+    fontWeight: 'bold',
     fontSize: 15,
   },
   healthCheckFees: {
     flexDirection: 'row',
-    backgroundColor: 'blue',
+    backgroundColor: '#276880',
     borderRadius: 8,
     paddingHorizontal: 2,
+  
   },
-  downBannerContainer:{
+  downBannerContainer: {
     padding: 10,
     // borderWidth:2,
-    height:300
-
+    height: 300,
   },
-  downBannerImage:{
-    objectFit:'cover',
-    
-    width:'100%',
+  downBannerImage: {
+    objectFit: 'cover',
+
+    width: '100%',
     // height:'100%',
-     height:'100%',
+    height: '100%',
     //  aspectRatio:16/15
-  }
+  },
 });
 
 export default HomeScreen;

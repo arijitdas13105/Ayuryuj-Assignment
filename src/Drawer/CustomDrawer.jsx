@@ -26,8 +26,11 @@ const CustomDrawer = props => {
         <View style={styles.familyHolderContainer}>
           <View style={styles.familyHolder}>
             <View style={styles.addFamilyHolder}>
-              <Entypo name="user" size={30} color="black" />
-              <Text style={styles.familyText}>Arpita</Text>
+            <View>
+            <Entypo name="user" size={30} color="white" />
+            </View>
+             
+              <Text style={styles.familyText}>Arpit </Text>
             </View>
             <View>
               <Entypo name="add-user" size={30} color="black" />
@@ -38,12 +41,12 @@ const CustomDrawer = props => {
               <Text style={styles.familyText}>father</Text>
             </View>
             <View>
-              <Entypo name="add-user" size={30} color="white" />
+              <Entypo name="add-user" size={30} color="black" />
               <Text style={styles.familyText}>Mother</Text>
             </View>
           </View>
           <View style={styles.addFamily}>
-            <Ionicons name="add-circle" size={30} color="white" />
+            <Ionicons name="add-circle" size={30} color="black" />
             <Text style={styles.familyText}>Add Family</Text>
           </View>
         </View>
@@ -182,7 +185,7 @@ container: {
     gap: 20,
   },
   familyHolderContainer: {
-    backgroundColor: 'blue',
+    backgroundColor: '#2EBBEE',
     color: 'white',
     gap: 20,
     paddingVertical: 10,
@@ -197,7 +200,9 @@ container: {
   addFamilyHolder: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
+     borderRadius:'50%',
+    padding:5,
+   },
   addFamily: {
     flexDirection: 'row',
     gap: 10,
@@ -206,6 +211,7 @@ container: {
   familyText: {
     color: 'white',
     fontWeight: 'bold',
+    fontSize:15
   },
 
   shareAppHolder: {

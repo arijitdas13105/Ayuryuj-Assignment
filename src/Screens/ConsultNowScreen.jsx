@@ -16,18 +16,28 @@ import { useNavigation } from '@react-navigation/native';
 const ConsultNowScreen = () => {
    const [symptompSelected, setSymptompSelected] = React.useState([]);
    const navigation=useNavigation();
+  // const handleSymptoms = (item) => {
+  //   console.log('Item clicked:', item);
+  //   // setSymptompSelected([...symptompSelected, item]);
+  //   setSymptompSelected([...symptompSelected, item]);
+  //  };
   const handleSymptoms = (item) => {
-    console.log('Item clicked:', item);
-    setSymptompSelected([...symptompSelected, item]);
-   };
+     const isSelected = symptompSelected.some((selected) => selected.symptom === item.symptom);
+  
+    if (isSelected) {
+       setSymptompSelected((prev) => prev.filter((selected) => selected.symptom !== item.symptom));
+    } else {
+       setSymptompSelected((prev) => [...prev, item]);
+    }
+  };
  const handleChooseDoctors = () => {
-    navigation.navigate('MyOrderScreen', {symptoms: symptompSelected});
+    navigation.navigate('ChooseDoctorScreen', {symptoms: symptompSelected});
   };
   return (
     <View style={styles.container}>
       {/* top upper symptoms */}
       <View style={styles.topUpperHolder}>
-        <Ionicons name="arrow-back" size={30} color="black" />
+        <Ionicons name="arrow-back" size={30} color="black" onPress={() => navigation.navigate('HomeScreen')}/>
         <Text>Symptoms</Text>
         <FontAwesome name="user-circle" size={30} color="black" />
       </View>
@@ -62,11 +72,12 @@ const ConsultNowScreen = () => {
       <ScrollView>
         <View style={styles.gridContainer}>
           {dummyDoctorData.map((item, index) => {
+            const isSelected = symptompSelected.includes(item);
             return (
               <TouchableOpacity
                  onPress={() => handleSymptoms(item)}
                 key={index}
-                style={styles.gridItems}>
+                style={[styles.gridItems,{backgroundColor: isSelected ? 'blue' : 'white'}]}>
                 <Image
                   style={{width: 50, height: 50, borderRadius: 10}}
                   source={{uri: item.image}}
@@ -77,7 +88,10 @@ const ConsultNowScreen = () => {
           })}
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.buttonDoctor} onPress={() => handleChooseDoctors() } >
+      <TouchableOpacity 
+      disabled={symptompSelected.length === 0}
+     style={[styles.buttonDoctor, symptompSelected.length === 0 && styles.buttonDisabled]}  
+      onPress={() => handleChooseDoctors() } >
         <Text style={styles.buttonText}>Choose Doctors</Text>
       </TouchableOpacity>
       ;
@@ -106,9 +120,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   input: {
-    flex: 1, // Allows TextInput to take up remaining space
-    fontSize: 16, // Font size for the placeholder and text
-    color: '#333', // Text color
+    flex: 1,  
+    fontSize: 16,  
+    color: '#333',  
   },
   gridContainer: {
     padding: 10,
@@ -146,6 +160,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
   },
+  buttonDisabled: {
+  backgroundColor: 'gray', 
+},
 });
 
 export default ConsultNowScreen;
