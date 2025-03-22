@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -13,6 +14,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreenGridData, TestPackages} from './Data';
 import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+
+ const { width, height } = Dimensions.get('window');
+
+ const scale = width / 400;  
+const responsiveSize = (size) => size * scale;
+
 const HomeScreen = () => {
   const navigation = useNavigation();
   const colors = [
@@ -29,19 +36,18 @@ const HomeScreen = () => {
         {/* top section */}
         <View style={styles.menuTopHolder}>
           <View style={[styles.rowDesign, styles.menu_location]}>
-            {/* <Entypo name="menu" size={30} color="black" /> */}
             <TouchableOpacity onPress={() => navigation.openDrawer()}>
-              <Entypo name="menu" size={30} color="black" />
+              <Entypo name="menu" size={responsiveSize(30)} color="black" />
             </TouchableOpacity>
 
             <View>
-              <Text>Your Location</Text>
-              <Text>Delhi</Text>
+              <Text style={styles.normalText}>Your Location</Text>
+              <Text style={styles.normalText}>Delhi</Text>
             </View>
           </View>
           <View style={[styles.rowDesign, styles.menu_location]}>
-            <Entypo name="wallet" size={30} color="black" />
-            <Ionicons name="notifications" size={30} color="black" />
+            <Entypo name="wallet" size={responsiveSize(30)} color="black" />
+            <Ionicons name="notifications" size={responsiveSize(30)} color="black" />
           </View>
         </View>
         {/* grid sections */}
@@ -64,7 +70,7 @@ const HomeScreen = () => {
                   item.extra && (
                     <View style={styles.gridExtraTextContainer}>
                   <LinearGradient
-                    colors={['#F38FD4', '#F8A98A']} // Gradient from light to dark red
+                    colors={['#F38FD4', '#F8A98A']}  
                     start={{x: 0, y: 0}}
                     end={{x: 1, y: 1}}
                     style={styles.gridExtraText}>
@@ -76,10 +82,6 @@ const HomeScreen = () => {
                 </View>
                   )
                 }
-                
-                {/* {item.extra && (
-                  <Text style={styles.gridExtraText}> {item.extra} </Text>
-                )} */}
               </View>
             );
           })}
@@ -87,7 +89,7 @@ const HomeScreen = () => {
 
         {/* skin contest section */}
         <View style={[styles.skinContestContainer]}>
-          <View style={{borderColor: 'black', gap: 20}}>
+          <View style={{borderColor: 'black', gap: responsiveSize(20)}}>
             <View style={styles.headerContainer}>
               <Text style={styles.skinContestTextHeader}> Skin Concerns? </Text>
             </View>
@@ -103,7 +105,7 @@ const HomeScreen = () => {
           </View>
           <View>
             <Image
-              style={{width: 200, height: 200}}
+              style={styles.doctorImage}
               source={{
                 uri: 'https://static.vecteezy.com/system/resources/previews/027/735/608/original/a-black-female-doctor-wearing-a-white-coat-free-png.png',
               }}
@@ -112,7 +114,7 @@ const HomeScreen = () => {
         </View>
         {/* text of FAQ */}
         <View style={styles.FAQContainer}>
-          <Text style={[styles.blackText, {fontSize: 20}]}>
+          <Text style={[styles.blackText, {fontSize: responsiveSize(20)}]}>
             Frequently Booked Health Checks
           </Text>
           <Text style={styles.faqViewALL}>View All</Text>
@@ -122,15 +124,15 @@ const HomeScreen = () => {
           {TestPackages.map((item, index) => {
             return (
               <View key={index} style={styles.gridPackageItems}>
-                <Text style={{fontSize: 15, fontWeight: 'bold', color: '#17207D'}}>
+                <Text style={{fontSize: responsiveSize(15), fontWeight: 'bold', color: '#17207D'}}>
                   {' '}
                   {item.testCount}+ Tests{' '}
                 </Text>
-                <Text style={[styles.blackText, {fontSize: 17}]}>
+                <Text style={[styles.blackText, {fontSize: responsiveSize(17)}]}>
                   {' '}
                   {item.title}{' '}
                 </Text>
-                <Text style={[styles.blackText, {fontSize: 17}]}>
+                <Text style={[styles.blackText, {fontSize: responsiveSize(17)}]}>
                   {' '}
                   {item.type}{' '}
                 </Text>
@@ -159,7 +161,6 @@ const HomeScreen = () => {
         <View style={styles.downBannerContainer}>
           <Image
             style={styles.downBannerImage}
-            // source={{uri:'https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2024/04/health-tools-desktop.webp'}}  />
             source={{
               uri: 'https://cdn.dribbble.com/users/4613797/screenshots/16277983/86_4x.jpg',
             }}
@@ -172,8 +173,8 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 2,
-    marginTop: 25,
+    padding: responsiveSize(2),
+    marginTop: height * 0.03,  
   },
   rowDesign: {
     flexDirection: 'row',
@@ -183,151 +184,151 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   menu_location: {
-    gap: 10,
+    gap: responsiveSize(10),
+  },
+  normalText: {
+    fontSize: responsiveSize(14),
   },
   gridPackageContainer: {
-    padding: 10,
-    // grid
+    padding: responsiveSize(10),
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 15,
+    gap: responsiveSize(15),
     justifyContent: 'center',
     alignItems: 'center',
   },
   gridPackageItems: {
     width: '45%',
-    // height: 150,
     backgroundColor: 'white',
-    borderRadius: 10,
-    paddingVertical: 25,
-    paddingHorizontal: 5,
+    borderRadius: responsiveSize(10),
+    paddingVertical: height * 0.03,
+    paddingHorizontal: responsiveSize(5),
     alignItems: 'flex-start',
-    gap:3
+    gap: responsiveSize(3)
   },
   gridContainer: {
-    padding: 10,
-    // grid
+    padding: responsiveSize(10),
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 15,
-
+    gap: responsiveSize(15),
     justifyContent: 'center',
   },
-
   gridItems: {
     width: '30%',
-    height: 150,
+    height: width * 0.38,  
     backgroundColor: 'white',
-    borderRadius: 10,
-    // justifyContent:'center',
+    borderRadius: responsiveSize(10),
     alignItems: 'center',
     position: 'relative',
-    justifyContent: 'space-between', // Distribute space between image and text
-    paddingVertical: 10,
+    justifyContent: 'space-between',
+    paddingVertical: responsiveSize(10),
   },
-
   gridImage: {
-    width: 80,
-    height: 90,
-    borderRadius: 10,
+    width: '80%',
+    height: '60%',
+    borderRadius: responsiveSize(10),
     alignSelf: 'center',
   },
   gridText: {
-    color: 'black',
     textAlign: 'center',
     color: 'black',
-    fontSize: 15,
+    fontSize: responsiveSize(15),
   },
   gridExtraTextContainer: {
-  position: 'absolute',
-  bottom: 20,
-  borderRadius: 5,
-  overflow: 'hidden',
-},
-  gridExtraText: {
-    paddingHorizontal: 8,
-    paddingVertical:2,
-     alignItems: 'center',
-  justifyContent: 'center',
+    position: 'absolute',
+    bottom: responsiveSize(20),
+    borderRadius: responsiveSize(5),
+    overflow: 'hidden',
   },
-  gridExtraTextStyle:{
+  gridExtraText: {
+    paddingHorizontal: responsiveSize(8),
+    paddingVertical: responsiveSize(2),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gridExtraTextStyle: {
     color: 'white',
     fontWeight: 'bold',
-    textAlign:'center',
-   },
+    textAlign: 'center',
+    fontSize: responsiveSize(12),
+  },
   skinContestContainer: {
-    marginTop: 20,
-    paddingHorizontal: 20,
-    height: 200,
-    borderRadius: 10,
+    marginTop: responsiveSize(20),
+    paddingHorizontal: responsiveSize(20),
+    height: height * 0.25,  
+    borderRadius: responsiveSize(10),
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   headerContainer: {
-    alignSelf: 'flex-start', // ✅ Shrinks to content width
+    alignSelf: 'flex-start',
     backgroundColor: 'white',
-    paddingHorizontal: 20, // ✅ Adjusts padding
-    paddingVertical: 4, // ✅ Gives some height
-    borderRadius: 25, // ✅ Rounds corners
+    paddingHorizontal: responsiveSize(20),
+    paddingVertical: responsiveSize(4),
+    borderRadius: responsiveSize(25),
     borderWidth: 1,
     borderColor: 'black',
   },
   skinContestTextHeader: {
     color: 'black',
     fontWeight: 'bold',
-    textAlign: 'center', // ✅ Centers text inside the View
+    textAlign: 'center',
+    fontSize: responsiveSize(14),
   },
   blueText: {
     color: '#05778B',
     fontWeight: 'bold',
-    fontSize: 25,
+    fontSize: responsiveSize(25),
   },
   blackText: {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 22,
+    fontSize: responsiveSize(22),
   },
   FAQContainer: {
-    padding: 10,
+    padding: responsiveSize(10),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: 10,
+    gap: responsiveSize(10),
     alignItems: 'center',
   },
   faqViewALL: {
-    paddingHorizontal: 8,
-    paddingVertical: 5,
-     borderRadius: 10,
+    paddingHorizontal: responsiveSize(8),
+    paddingVertical: responsiveSize(5),
+    borderRadius: responsiveSize(10),
     fontWeight: 'bold',
     backgroundColor: '#05778B',
     color: 'white',
     textAlign: 'center',
+    fontSize: responsiveSize(14),
   },
   feesTextColor: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: responsiveSize(15),
   },
   healthCheckFees: {
     flexDirection: 'row',
     backgroundColor: '#276880',
-    borderRadius: 8,
-    paddingHorizontal: 2,
-  
+    borderRadius: responsiveSize(8),
+    paddingHorizontal: responsiveSize(2),
+    gap: responsiveSize(2),
   },
   downBannerContainer: {
-    padding: 10,
-    // borderWidth:2,
-    height: 300,
+    padding: responsiveSize(10),
+    height: height * 0.3, 
   },
   downBannerImage: {
     objectFit: 'cover',
-
     width: '100%',
-    // height:'100%',
     height: '100%',
-    //  aspectRatio:16/15
   },
+  doctorImage: {
+    width: width * 0.45,
+    height: width * 0.45,
+    resizeMode: 'contain',
+  }
 });
 
 export default HomeScreen;
+ 
